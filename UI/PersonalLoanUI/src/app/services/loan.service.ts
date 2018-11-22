@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Loan } from '../models/loan.model';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -12,9 +12,14 @@ export class LoanService {
    }
 
    getDefaultLoans(): Observable<Loan[]> {
-     return this.http.get<Loan[]>('http://demo5365007.mockable.io/getDefaultLoans')
-     .pipe(
-       catchError((error: any) => Observable.throw(error.json()))
+     return this.http.get<Loan[]>('http://demo5365007.mockable.io/getDefaultLoans').pipe(
+       catchError((err: any) => throwError(err.message))
+     );
+   }
+
+   getNewLoans(): Observable<Loan> {
+     return this.http.get<Loan>('http://demo5365007.mockable.io/getNewLoan').pipe(
+      catchError((err: any) => throwError(err.message))
      );
    }
 }

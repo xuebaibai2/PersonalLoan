@@ -14,7 +14,6 @@ export class LoanDetailCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.loan);
   }
 
 }

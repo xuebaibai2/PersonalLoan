@@ -23,4 +23,15 @@ export class LoanEffects {
             }
         )
     );
+
+    @Effect()
+    loadNewLoan$ = this.actions$.ofType(loanActions.LOAD_NEW_LOANS).pipe(
+        switchMap(() => {
+            return this.loanService.getNewLoans().pipe(
+                map(loan => new loanActions.LoadNewLoanSuccess(loan)),
+                catchError((err: any) => of(new loanActions.LoadNewLoanFail(err))
+                 )
+            );
+        })
+    );
 }
