@@ -1,4 +1,4 @@
-<h5> You have {{ loanAmount }} Personal Loan</h5>
+<h5> You have {{ (loans$ | async).length }} Personal Loan</h5>
 <div class="loan-card-container">
     <app-loan-detail-card></app-loan-detail-card>
 </div>

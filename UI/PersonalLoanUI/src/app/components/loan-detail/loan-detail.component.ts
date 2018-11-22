@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Loan } from 'src/app/models/loan.model';
+
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as fromStore from '../../store';
 
 @Component({
   selector: 'app-loan-detail',
@@ -7,9 +12,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoanDetailComponent implements OnInit {
 
-  constructor() { }
+  loans$: Observable<Loan[]>;
+
+  constructor(private store: Store<fromStore.AppState>) { }
 
   ngOnInit() {
+    this.loans$ = this.store.select<any>(fromStore.getLoans);
+    this.store.dispatch(new fromStore.LoadDefaultLoans());
   }
 
 }
