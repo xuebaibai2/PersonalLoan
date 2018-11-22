@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+    height: 100vh;
+}
+
+#app-div {
+    display: grid;
+    grid-template-areas: 
+    'header'
+    'body';
+    grid-auto-rows: minmax(100px, auto);
+}
+
+app-header {
+    grid-area: header;
+}
+
+app-body {
+    grid-area: body;
+}
+
+#app-header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+    'headerText headerText'
+    'headerTopLeft headerTopRight '
+    'headerBottomLeft headerBottomRight';
+    grid-auto-rows: minmax(50px, auto);
+}
+
+#headerText {
+    grid-area: headerText
+}
+
+#app-carryoveramount {
+    grid-area: headerTopLeft;
+}
+
+#app-btn-apply-amt {
+    grid-area: headerTopRight;
+}
+
+#app-btn-apply-new-loan {
+    grid-area: headerBottomRight;
+}
+
+#app-body {
+    display: grid;
+    grid-template-areas: 
+    'bodyLeft bodyRight'
+}
+
+#app-loan-detail {
+    grid-area: bodyLeft;
+}
+
+#app-notification {
+    grid-area: bodyRight;
+}
