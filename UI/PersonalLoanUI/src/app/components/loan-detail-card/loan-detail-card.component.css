@@ -1,0 +1,41 @@
+.loan-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid black;
+    grid-auto-rows: minmax(30px, auto);
+}
+
+.loan-card-header {
+    background-color: rgb(233, 233, 233);
+    border-bottom: 1px solid black;
+    padding:15px;
+}
+
+.loan-card-balance {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid black;
+    padding:15px;
+}
+
+.loan-card-balance > div {
+    grid-column: auto;
+    
+}
+
+.loan-card-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin:15px;
+    grid-gap: 5px;
+}
+
+.loan-card-detail > div {
+    grid-column: 1/4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+}
+
