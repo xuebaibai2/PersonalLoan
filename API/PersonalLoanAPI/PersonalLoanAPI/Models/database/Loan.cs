@@ -17,5 +17,6 @@ namespace PersonalLoanAPI.Models.database
         public int PayoutAmount { get; set; }
         public string RefNumber { get; set; }
         public LoanLevel LoanLevel { get; set; }
+        public bool IsDefaultLoan { get; set; }
     }
 }

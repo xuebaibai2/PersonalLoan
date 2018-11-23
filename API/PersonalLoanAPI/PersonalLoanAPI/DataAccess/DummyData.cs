@@ -15,18 +15,19 @@ namespace PersonalLoanAPI.DataAccess
             {
                 new Loan()
                 {
-                    RefNumber = "933217230",
-                    Name = "Tempore fuga quaerat",
+                    RefNumber = "0000001",
+                    Name = "Loan Default",
                     Balance= 1225,
                     Interest = 282,
                     EarlyPaymentFee = 145,
                     PayoutAmount = 1762,
-                    LoanLevel = LoanLevel.Low
+                    LoanLevel = LoanLevel.Low,
+                    IsDefaultLoan = true
                 },
                 new Loan()
                 {
-                    RefNumber = "93366630",
-                    Name = "Loan 2",
+                    RefNumber = "89745124",
+                    Name = "Loan 12",
                     Balance= 453,
                     Interest = 14,
                     EarlyPaymentFee = 6234,
@@ -35,8 +36,8 @@ namespace PersonalLoanAPI.DataAccess
                 },
                 new Loan()
                 {
-                    RefNumber = "933241230",
-                    Name = "Loan 3",
+                    RefNumber = "55345435",
+                    Name = "Loan 13",
                     Balance= 2342,
                     Interest = 234,
                     EarlyPaymentFee = 574,
