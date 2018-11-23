@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { Loan } from 'src/app/models/loan.model';
 import * as fromStore from '../../store';
+import * as CONSTVALUE from '../../shared/const-value';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-btn-apply-new-loan',
@@ -25,4 +27,9 @@ export class BtnApplyNewLoanComponent implements OnInit {
     this.store.dispatch(new fromStore.LoadNewLoan());
   }
 
+  isMaxLoanAmountReached() {
+    return this.loans$.pipe(
+      switchMap((loans) => of(loans.length >= CONSTVALUE.MAX_LOAN_AMOUNT))
+    );
+  }
 }
