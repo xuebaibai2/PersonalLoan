@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Loan } from 'src/app/models/loan.model';
 
-// load default loans
 export const LOAD_DEFAULT_LOANS = 'LOAD_DEFAULT_LOANS';
 export const LOAD_DEFAULT_LOANS_FAIL = 'LOAD_DEFAULT_LOANS_FAIL';
 export const LOAD_DEFAULT_LOANS_SUCCESS = 'LOAD_DEFAULT_LOANS_SUCCESS';

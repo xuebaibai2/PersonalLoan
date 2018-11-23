@@ -13,6 +13,7 @@ import * as fromStore from '../../store';
 export class NotificationComponent implements OnInit {
 
   loanError$: Observable<string>;
+  test$: Observable<any>;
   
   constructor(private store: Store<fromStore.AppState>) { }
 

@@ -5,7 +5,7 @@
   <div class="loan-card-balance">
     <div>Balance</div>
     <div>${{loan.balance}}</div>
-    <div><label><input type="checkbox"> Top Up</label></div>
+    <div><label><input type="checkbox" (change)="topUpChanged()"> Top Up</label></div>
   </div>
   <div class="loan-card-detail">
     <div class="interest">

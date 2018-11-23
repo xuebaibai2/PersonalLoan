@@ -23,6 +23,11 @@ export class BtnApplyNewLoanComponent implements OnInit {
 
   newLoanBtnClicked() {
     this.store.dispatch(new fromStore.LoadNewLoan());
+    this.store.select<any>(fromStore.getAppState).subscribe(
+      (obs) => {
+        console.log(obs);
+      }
+    );
   }
 
 }
