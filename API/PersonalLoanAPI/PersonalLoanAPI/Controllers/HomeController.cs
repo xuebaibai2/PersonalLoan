@@ -12,7 +12,7 @@ namespace PersonalLoanAPI.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            return View();
+            return Content("Personal Loan Web API");
         }
     }
 }
