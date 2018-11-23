@@ -1,0 +1,6 @@
+<h4> You have {{ (loans$ | async).length }} Personal Loan</h4>
+<div class="loan-card-container">
+    <div *ngFor="let loan of (loans$ | async); let i = index">
+        <app-loan-detail-card [loan]="loan" [index]="i + 1"></app-loan-detail-card>
+    </div>
+</div>
