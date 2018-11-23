@@ -1,1 +1,9 @@
-{{loanError$ | async}}
+
+<div class="notification">
+    <div *ngIf="(loanError$ | async)" class="notification-error">
+        {{loanError$ | async}}
+    </div>
+    <div *ngIf="hasWarning" class="notification-warning">
+        {{maxLoanAmountWarnning}}
+    </div>
+</div>

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { Loan } from 'src/app/models/loan.model';
 import * as fromStore from '../../store';
 import * as CONSTVALUE from '../../shared/const-value';
-import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-btn-apply-new-loan',
