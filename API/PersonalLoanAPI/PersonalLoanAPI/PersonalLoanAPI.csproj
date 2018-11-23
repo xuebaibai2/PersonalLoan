@@ -130,6 +130,9 @@
     <EmbeddedResource Include="Migrations\PersonalLoan\201811231155011_AddIsDefaultLoanField.resx">
       <DependentUpon>201811231155011_AddIsDefaultLoanField.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\PersonalLoan\201811231303512_AddErrorTable.resx">
+      <DependentUpon>201811231303512_AddErrorTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -184,12 +187,20 @@
     <Compile Include="Migrations\PersonalLoan\201811231155011_AddIsDefaultLoanField.Designer.cs">
       <DependentUpon>201811231155011_AddIsDefaultLoanField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\PersonalLoan\201811231303512_AddErrorTable.cs" />
+    <Compile Include="Migrations\PersonalLoan\201811231303512_AddErrorTable.Designer.cs">
+      <DependentUpon>201811231303512_AddErrorTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PersonalLoan\Configuration.cs" />
-    <Compile Include="Models\api\Loan.cs" />
+    <Compile Include="Models\api\LoanApi.cs" />
     <Compile Include="Models\api\RequestLoanParams.cs" />
+    <Compile Include="Models\database\Errors.cs" />
     <Compile Include="Models\database\Loan.cs" />
     <Compile Include="Models\LoanLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Filters\APIExceptionFilterAttribute.cs" />
+    <Compile Include="Services\ErrorService.cs" />
+    <Compile Include="Services\LoanService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\PersonalLoanDB.mdf" />

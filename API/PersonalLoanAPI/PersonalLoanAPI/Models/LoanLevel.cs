@@ -7,7 +7,7 @@ namespace PersonalLoanAPI.Models
 {
     public enum LoanLevel
     {
-        Low,
+        Low = 1,
         Mid,
         High
     }

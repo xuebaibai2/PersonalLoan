@@ -1,11 +1,13 @@
 ﻿using PersonalLoanAPI.DataAccess;
 using PersonalLoanAPI.Models;
 using PersonalLoanAPI.Models.api;
+using PersonalLoanAPI.Models.database;
+using PersonalLoanAPI.Services;
+using PersonalLoanAPI.Services.Filters;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,42 +15,43 @@ using System.Web.Http;
 
 namespace PersonalLoanAPI.Controllers.api
 {
+    [APIExceptionFilter]
     public class LoansController : ApiController
     {
-        [Route("api/loans/getDefaultLoans")]
-        public async Task<IEnumerable<Loan>> GetDefaultLoans()
+        LoanService loanService;
+        ErrorService errorService;
+        public LoansController()
         {
-            using (var db = new PersonalLoanContext())
-            {
-                return await db.Loans.Where(x => x.IsDefaultLoan)
-                    .Select(x => new Loan()
-                    {
-                        refNumber = x.RefNumber,
-                        balance = x.Balance,
-                        earlyPaymentFee = x.EarlyPaymentFee,
-                        interest = x.Interest,
-                        name = x.Name,
-                        payoutAmount = x.PayoutAmount
-                    }).ToListAsync();
-            }
+            loanService = new LoanService();
+            errorService = new ErrorService();
         }
-
-        [Route("api/loans/getNewLoans")]
-        public async Task<IEnumerable<Loan>> GetNewLoans(RequestLoanParams requestParams)
+        [Route("api/loans/getDefaultLoans")]
+        public async Task<IEnumerable<LoanApi>> GetDefaultLoans()
         {
-            using (var db = new PersonalLoanContext())
+            return await loanService.GetDefaultLoans();
+        }
+        
+        [Route("api/loans/getNewLoans")]
+        public async Task<IEnumerable<LoanApi>> GetNewLoans(RequestLoanParams requestParams)
+        {
+            if (requestParams == null || requestParams.loanLevel == 0)
             {
-                return await db.Loans.Where(x => x.LoanLevel == requestParams.loanLevel && !requestParams.refNumbers.Contains(x.RefNumber))
-                    .Select(x => new Loan()
-                    {
-                        refNumber = x.RefNumber,
-                        balance = x.Balance,
-                        earlyPaymentFee = x.EarlyPaymentFee,
-                        interest = x.Interest,
-                        name = x.Name,
-                        payoutAmount = x.PayoutAmount
-                    }).ToListAsync();
+                var error = new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent("No Personal Loan is found.")
+                });
+
+                // Log Exception
+                Errors err = new Errors()
+                {
+                    ExceptionType = error.GetType().ToString(),
+                    Message = error.Message,
+                    Date = DateTime.Today
+                };
+                errorService.LogError(err);
+                throw error;
             }
+            return await loanService.GetNewLoans(requestParams);
         }
     }
 }
