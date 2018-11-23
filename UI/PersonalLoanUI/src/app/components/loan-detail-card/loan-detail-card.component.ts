@@ -3,7 +3,6 @@ import { Loan } from 'src/app/models/loan.model';
 import { Payout } from 'src/app/models/payout.model';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 import * as fromStore from '../../store';
 

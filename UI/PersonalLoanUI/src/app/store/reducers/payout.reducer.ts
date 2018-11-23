@@ -17,12 +17,6 @@ export function reducer(state = initialState, action: fromPayout.PayoutAction): 
         case fromPayout.ADD_PAYOUT_AMT: {
             const selectedLoans = [...state.selectedLoans, action.payload.loan];
             const payoutAmount = state.payoutAmount + action.payload.amount;
-            // remove later
-            console.log({
-                ...state,
-                selectedLoans,
-                payoutAmount
-            });
             return {
                 ...state,
                 selectedLoans,
@@ -34,12 +28,6 @@ export function reducer(state = initialState, action: fromPayout.PayoutAction): 
                 (loan) => loan !== action.payload.loan
             );
             const payoutAmount = state.payoutAmount - action.payload.amount;
-            // remove later
-            console.log({
-                ...state,
-                selectedLoans,
-                payoutAmount
-            });
             return {
                 ...state,
                 selectedLoans,
