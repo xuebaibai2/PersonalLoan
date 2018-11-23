@@ -1,1 +1,6 @@
 /UI/PersonalLoanUI/node_modules
+/API/PersonalLoanAPI/packages
+/API/PersonalLoanAPI/PersonalLoanAPI/bin
+/API/PersonalLoanAPI/PersonalLoanAPI/obj/Debug
+/API/PersonalLoanAPI/.vs
+/API/PersonalLoanAPI/PersonalLoanAPI.Tests/obj/Debug
