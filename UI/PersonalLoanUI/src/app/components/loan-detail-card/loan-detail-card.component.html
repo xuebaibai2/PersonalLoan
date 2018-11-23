@@ -1,0 +1,25 @@
+<div class="loan-card">
+  <div class="loan-card-header">
+    {{index}}. {{loan.name}} # {{loan.id}}
+  </div>
+  <div class="loan-card-balance">
+    <div>Balance</div>
+    <div>${{loan.balance}}</div>
+    <div><label><input type="checkbox" (change)="topUpChanged()"> Top Up</label></div>
+  </div>
+  <div class="loan-card-detail" [ngClass]="{'display-card-detail': topUpSelected}">
+    <div class="interest">
+      <div>Balance includes Interest of</div>
+      <div>${{loan.interest}}</div>
+    </div>
+    <div class="repay-fee">
+      <div>Early repayment fee</div>
+      <div>${{loan.earlyPaymentFee}}</div>
+    </div>
+    <div class="payout-amt">
+      <div>Payout/Carryover amount</div>
+      <div>${{loan.payoutAmount}}</div>
+      <div>This amount will be carried over</div>
+    </div>
+  </div>
+</div>
