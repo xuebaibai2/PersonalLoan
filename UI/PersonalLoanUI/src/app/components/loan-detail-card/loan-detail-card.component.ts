@@ -32,7 +32,7 @@ export class LoanDetailCardComponent implements OnInit {
   topUpChanged() {
     this.topUpSelected = !this.topUpSelected;
     if (this.topUpSelected) {
-    this.store.dispatch(new fromStore.AddPayoutAmt(this.payout));
+      this.store.dispatch(new fromStore.AddPayoutAmt(this.payout));
     } else {
       this.store.dispatch(new fromStore.ReducePayoutAmt(this.payout));
     }

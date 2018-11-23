@@ -3,6 +3,8 @@
     grid-template-columns: 1fr;
     border: 1px solid black;
     grid-auto-rows: minmax(30px, auto);
+    width: 700px;
+    margin-bottom: 20px;
 }
 
 .loan-card-header {
@@ -13,7 +15,7 @@
 
 .loan-card-balance {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: 1fr;
     border-bottom: 1px solid black;
     padding:15px;
@@ -25,8 +27,12 @@
 }
 
 .loan-card-detail {
+    display: none;
+}
+
+.display-card-detail {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: 1fr 1fr 1fr;
     margin:15px;
     grid-gap: 5px;
@@ -35,7 +41,5 @@
 .loan-card-detail > div {
     grid-column: 1/4;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    
+    grid-template-columns: 2fr 1fr 2fr;
 }
-
