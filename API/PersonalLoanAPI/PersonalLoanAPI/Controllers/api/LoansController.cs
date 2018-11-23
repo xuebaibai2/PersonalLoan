@@ -12,9 +12,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace PersonalLoanAPI.Controllers.api
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "", methods:"*")]
     [APIExceptionFilter]
     public class LoansController : ApiController
     {
