@@ -2,3 +2,6 @@
     display: grid;
     grid-template-columns: 5fr 2fr 1fr;
 }
+.amount {
+    font-weight: bold;
+}
