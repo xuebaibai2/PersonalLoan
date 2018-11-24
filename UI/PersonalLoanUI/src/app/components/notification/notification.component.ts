@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 
 import * as fromStore from '../../store';
 import * as CONSTVALUE from '../../shared/const-value';
-import { Loan } from 'src/app/models/loan.model';
+import { Loan } from '../../models/loan.model';
+import { LoanState } from '../../store/reducers/loans.reducer';
 
 @Component({
   selector: 'app-notification',
@@ -30,6 +31,21 @@ export class NotificationComponent implements OnInit {
           this.hasWarning = true;
           this.maxLoanAmountWarnning = loans.length >= CONSTVALUE.MAX_LOAN_AMOUNT ?
           CONSTVALUE.MAX_LOAN_AMOUNT_WARNING : '';
+        }
+      }
+    );
+
+    this.store.select<any>(fromStore.getLoanState).subscribe(
+      (state: LoanState) => {
+        if (state.data.length + state.selectedNewLoans.length > CONSTVALUE.MAX_LOAN_AMOUNT) {
+          this.hasWarning = true;
+          this.maxLoanAmountWarnning = CONSTVALUE.MAX_LOAN_AMOUNT_SELECTED_WARNING;
+        } else if (state.data.length >= CONSTVALUE.MAX_LOAN_AMOUNT) {
+          this.hasWarning = true;
+          this.maxLoanAmountWarnning = state.data.length >= CONSTVALUE.MAX_LOAN_AMOUNT ?
+          CONSTVALUE.MAX_LOAN_AMOUNT_WARNING : '';
+        } else {
+          this.hasWarning = false;
         }
       }
     );

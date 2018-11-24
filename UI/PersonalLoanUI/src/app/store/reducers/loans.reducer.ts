@@ -47,9 +47,11 @@ export function reducer(state = initialState, action: fromLoans.LoansAction): Lo
             };
         }
         case fromLoans.LOAD_NEW_LOANS: {
+            const selectedNewLoans = [];
             return {
                 ...state,
-                loading: true
+                loading: true,
+                selectedNewLoans
             };
         }
         case fromLoans.LOAD_NEW_LOANS_SUCCESS: {

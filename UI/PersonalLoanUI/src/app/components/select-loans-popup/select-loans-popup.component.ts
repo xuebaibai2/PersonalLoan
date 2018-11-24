@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 
 import { Loan } from 'src/app/models/loan.model';
 import * as fromStore from '../../store';
+import { AppState } from '../../store';
+import * as CONSTVALUE from '../../shared/const-value';
 
 @Component({
   selector: 'app-select-loans-popup',
@@ -12,15 +14,34 @@ import * as fromStore from '../../store';
   styleUrls: ['./select-loans-popup.component.css']
 })
 export class SelectLoansPopupComponent implements OnInit {
-  loans$: Observable<Loan[]>;
+  retrievedNewLoans$: Observable<Loan[]>;
+  loanState$: Observable<AppState>;
+  stagedLoansNum: number;
+  selectedNewLoansNum: number;
+  isBtnDisabled: boolean;
+
 
   constructor(private store: Store<fromStore.AppState>) { }
 
   ngOnInit() {
-    this.loans$ = this.store.select<any>(fromStore.getRetrievedNewLoans);
+    this.retrievedNewLoans$ = this.store.select<any>(fromStore.getRetrievedNewLoans);
+
+    this.store.select<any>(fromStore.getLoanState).subscribe(
+      (state) => {
+        this.stagedLoansNum = state.data.length;
+        this.selectedNewLoansNum = state.selectedNewLoans.length;
+        this.isBtnDisabled = !this.isMaxAllowedLoanReached();
+      }
+    );
   }
 
   selectLoanBtnClicked() {
-    this.store.dispatch(new fromStore.ConfirmSelectNewLoans());
+    if (this.isMaxAllowedLoanReached()) {
+      this.store.dispatch(new fromStore.ConfirmSelectNewLoans());
+    }
+  }
+
+  isMaxAllowedLoanReached() {
+    return CONSTVALUE.MAX_LOAN_AMOUNT >= this.stagedLoansNum + this.selectedNewLoansNum;
   }
 }
