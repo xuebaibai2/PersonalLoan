@@ -53,7 +53,7 @@ export function reducer(state = initialState, action: fromLoans.LoansAction): Lo
             };
         }
         case fromLoans.LOAD_NEW_LOANS_SUCCESS: {
-            const retrievedNewLoans = [...state.retrievedNewLoans, ...action.payload];
+            const retrievedNewLoans = action.payload;
             return {
                 ...state,
                 loading: false,

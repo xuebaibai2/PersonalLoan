@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
-import { Loan } from 'src/app/models/loan.model';
+import { Loan } from '../../models/loan.model';
+import { LoadNewLoanParam } from '../../models/api/loadNewLoan.param.model';
 
 export const LOAD_DEFAULT_LOANS = 'LOAD_DEFAULT_LOANS';
 export const LOAD_DEFAULT_LOANS_FAIL = 'LOAD_DEFAULT_LOANS_FAIL';
@@ -29,6 +30,7 @@ export class LoadDefaultLoansSuccess implements Action {
 
 export class LoadNewLoan implements Action {
   readonly type = LOAD_NEW_LOANS;
+  constructor (public payload: LoadNewLoanParam) {}
 }
 
 export class LoadNewLoanFail implements Action {

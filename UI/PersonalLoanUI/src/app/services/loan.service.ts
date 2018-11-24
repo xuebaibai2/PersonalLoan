@@ -18,9 +18,9 @@ export class LoanService {
     );
   }
 
-  getNewLoans(): Observable<Loan[]> {
+  getNewLoans(loanLevel: string): Observable<Loan[]> {
     return this.http.get<Loan[]>(CONSTVALUE.URI_GET_NEW_LOANS, {
-      params: {'loanLevel': '2'}}).pipe(
+      params: {'loanLevel': loanLevel}}).pipe(
      catchError((err: any) => throwError(err.error))
     );
   }

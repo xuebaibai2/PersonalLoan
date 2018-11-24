@@ -26,8 +26,8 @@ export class LoanEffects {
 
     @Effect()
     loadNewLoan$ = this.actions$.ofType(loanActions.LOAD_NEW_LOANS).pipe(
-        switchMap(() => {
-            return this.loanService.getNewLoans().pipe(
+        switchMap((loadNewLoan: loanActions.LoadNewLoan) => {
+            return this.loanService.getNewLoans(loadNewLoan.payload.loanLevel.toLocaleString()).pipe(
                 map(loan => new loanActions.LoadNewLoanSuccess(loan)),
                 catchError((err: any) => of(new loanActions.LoadNewLoanFail(err))
                  )
