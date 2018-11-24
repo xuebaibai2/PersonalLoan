@@ -116,7 +116,7 @@ app-body {
   border: 1px solid gray;
 }
 
-.btn-new-loan:hover:enabled{
+.btn-new-loan:hover:enabled {
   -webkit-animation-name: normalBtnHover;
   -webkit-animation-duration: 500ms;
   -webkit-animation-fill-mode: forwards;
@@ -130,7 +130,7 @@ app-body {
 }
 
 .btn-apply-amt:hover:enabled,
-.btn-popup-confirm:hover:enabled  {
+.btn-popup-confirm:hover:enabled {
   -webkit-animation-name: applyAmtHover;
   -webkit-animation-duration: 500ms;
   -webkit-animation-fill-mode: forwards;
@@ -174,10 +174,12 @@ input[type='checkbox'] {
   #header-tr {
     grid-column: 1/2;
     border-bottom: 2px solid lightgray;
-  } 
+  }
+
   #header-br {
     grid-column: 2/3;
   }
+
   #header-bl {
     display: none;
   }
@@ -193,7 +195,7 @@ input[type='checkbox'] {
   #app-carryoveramount {
     padding-left: 10em;
     padding-right: 10em;
-}
+  }
 
 }
 
@@ -223,13 +225,15 @@ input[type='checkbox'] {
     width: 100%;
     padding: 0;
     text-align: center;
-  } 
+  }
+
   #header-br {
     grid-column: 1/2;
     width: 100%;
     padding: 0;
     text-align: center;
   }
+
   #header-bl {
     display: none;
   }
@@ -244,27 +248,41 @@ input[type='checkbox'] {
   }
 
   #app-carryoveramount {
-    padding-left: 10em;
-    padding-right: 10em;
+    padding-left: 5em;
+    padding-right: 5em;
+  }
+
+  @media(max-width: 600px) {
+    #headerText {
+      width: 100%;
+      text-align: center;
+      padding: 0;
+      font-size: 1.5rem;
+    }
+
+    #app-carryoveramount {
+      padding-left: 4em;
+      padding-right: 4em;
+    }
+
+    .btn {
+      width: 80%;
+      font-size: 1.5rem;
+    }
+
+    .btn-popup-confirm {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  @media(max-width: 530px) {
+    .btn {
+      width: 80%;
+      font-size: 1rem;
+    }
+  }
 }
 
-@media(max-width: 600px) {
-  #headerText {
-    width: 100%;
-    text-align: center;
-    padding: 0;
-    font-size: 1.5rem;
-  }
-  #app-carryoveramount {
-    padding-left: 4em;
-    padding-right: 4em;
-}
-.btn {
-  width: 80%;
-  font-size: 1.5rem;
-}
-}
-}
 @-webkit-keyframes applyAmtHover {
   from {
     background-color: #ffdb4c

@@ -18,22 +18,24 @@ export class NotificationComponent implements OnInit {
   loanError$: Observable<string>;
   maxLoanAmountWarnning: string;
   hasWarning: boolean;
+  isOnModalView: boolean;
   
   constructor(private store: Store<fromStore.AppState>) { }
 
   ngOnInit() {
     this.hasWarning = false;
     this.loanError$ = this.store.select<any>(fromStore.getLoansError);
+    this.isOnModalView = false;
 
-    this.store.select<any>(fromStore.getLoans).subscribe(
-      (loans: Loan[]) => {
-        if (loans.length >= CONSTVALUE.MAX_LOAN_AMOUNT) {
-          this.hasWarning = true;
-          this.maxLoanAmountWarnning = loans.length >= CONSTVALUE.MAX_LOAN_AMOUNT ?
-          CONSTVALUE.MAX_LOAN_AMOUNT_WARNING : '';
-        }
-      }
-    );
+    // this.store.select<any>(fromStore.getLoans).subscribe(
+    //   (loans: Loan[]) => {
+    //     if (loans.length >= CONSTVALUE.MAX_LOAN_AMOUNT) {
+    //       this.hasWarning = true;
+    //       this.maxLoanAmountWarnning = loans.length >= CONSTVALUE.MAX_LOAN_AMOUNT ?
+    //       CONSTVALUE.MAX_LOAN_AMOUNT_WARNING : '';
+    //     }
+    //   }
+    // );
 
     this.store.select<any>(fromStore.getLoanState).subscribe(
       (state: LoanState) => {
@@ -47,6 +49,7 @@ export class NotificationComponent implements OnInit {
         } else {
           this.hasWarning = false;
         }
+        this.isOnModalView = state.retrievedNewLoans.length > 0;
       }
     );
   }

@@ -1,0 +1,24 @@
+@-webkit-keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ffdb4c;
+  border-top-color: black;
+  -webkit-animation: spinner .6s linear infinite;
+  animation: spinner .6s linear infinite;
+  margin: 10px 0 0 -30px;
+}
