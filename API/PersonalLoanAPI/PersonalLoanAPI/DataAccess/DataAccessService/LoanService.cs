@@ -31,7 +31,7 @@ namespace PersonalLoanAPI.DataAccess.DataAccessService
         public async Task<IEnumerable<LoanApi>> GetNewLoans(RequestLoanParams requestParams) {
             using (var db = new PersonalLoanContext())
             {
-                return await db.Loans.Where(x => x.LoanLevel == requestParams.loanLevel && !requestParams.refNumbers.Contains(x.RefNumber))
+                return await db.Loans.Where(x => x.LoanLevel == requestParams.loanLevel)
                     .Select(x => new LoanApi()
                     {
                         refNumber = x.RefNumber,
