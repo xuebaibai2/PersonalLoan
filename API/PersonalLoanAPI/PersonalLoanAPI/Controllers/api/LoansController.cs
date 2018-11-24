@@ -31,7 +31,7 @@ namespace PersonalLoanAPI.Controllers.api
         }
         
         [Route("api/loans/getNewLoans")]
-        public async Task<IEnumerable<LoanApi>> GetNewLoans(RequestLoanParams requestParams)
+        public async Task<IEnumerable<LoanApi>> GetNewLoans([FromUri]RequestLoanParams requestParams)
         {
             if (requestParams == null || requestParams.loanLevel == 0)
             {
