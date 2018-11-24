@@ -1,0 +1,21 @@
+#app-body {
+  display: grid;
+  grid-template-areas:
+    'bodyLeft bodyRight';
+  grid-template-columns: 3fr 1fr;
+  margin-top: 3em;
+}
+
+#body-l {
+  grid-area: bodyLeft;
+}
+
+#body-r {
+  grid-area: bodyRight;
+  z-index: 2;
+  height: 0;
+}
+
+#app-loan-detail {}
+
+#app-notification {}

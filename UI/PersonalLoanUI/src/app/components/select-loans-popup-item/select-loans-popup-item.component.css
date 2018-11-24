@@ -1,7 +1,12 @@
-.popup-item {
-    border: 1px solid black;
-    margin: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    justify-items: auto;
+.popup-item>label {
+  border-bottom: 2px solid lightgray;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 1fr;
+  justify-items: auto;
+  cursor: pointer;
+}
+
+.item-container input[type='checkbox'] {
+  justify-self: center;
 }

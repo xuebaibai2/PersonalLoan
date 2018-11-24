@@ -1,61 +1,194 @@
-/* You can add global styles to this file, and also import other style files */
-body, html {
-    height: 100vh;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body,
+html {
+  height: 100vh;
+  font-family: 'Open Sans', serif;
+  margin: 0;
+  padding: 0;
 }
 
 #app-div {
-    display: grid;
-    grid-template-areas: 
+  display: grid;
+  grid-template-areas:
     'header'
     'body';
-    grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(100px, auto);
 }
 
 app-header {
-    grid-area: header;
+  grid-area: header;
 }
 
 app-body {
-    grid-area: body;
+  grid-area: body;
 }
 
 #app-header {
-    grid-area: header;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas: 
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas:
     'headerText headerText'
     'headerTopLeft headerTopRight '
     'headerBottomLeft headerBottomRight';
-    grid-auto-rows: minmax(50px, auto);
+  grid-auto-rows: minmax(65, auto);
+  justify-items: center;
+  align-items: stretch;
+}
+
+#header-tl,
+#header-tr,
+#header-bl,
+#header-br {
+  width: 100%;
+  height: 100%;
+}
+
+#header-tl {
+  border-top: 2px solid lightgray;
+  border-right: 2px solid lightgray;
+}
+
+#header-tr {
+  border-top: 2px solid lightgray;
+}
+
+#header-bl {
+  border-top: 2px solid lightgray;
+  border-right: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+}
+
+#header-br {
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
 }
 
 #headerText {
-    grid-area: headerText
+  grid-area: headerText;
+  justify-self: left;
+  padding-left: 10em
 }
 
 #app-carryoveramount {
-    grid-area: headerTopLeft;
+  padding-left: 10em;
 }
 
 #app-btn-apply-amt {
-    grid-area: headerTopRight;
+  padding: 8px 0 8px 20px;
 }
+
+#app-empty-div {}
 
 #app-btn-apply-new-loan {
-    grid-area: headerBottomRight;
+  margin: 8px 0 8px 20px;
 }
 
-#app-body {
-    display: grid;
-    grid-template-areas: 
-    'bodyLeft bodyRight'
+.btn {
+  width: 250px;
+  display: inline-block;
+  height: 3rem;
+  min-width: 11.25rem;
+  padding: 0 1.5rem;
+  border-radius: 50px;
+  line-height: calc(3rem - 2px);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
 }
 
-#app-loan-detail {
-    grid-area: bodyLeft;
+.btn:disabled {
+  cursor: not-allowed;
+  background-color: lightgray;
 }
 
-#app-notification {
-    grid-area: bodyRight;
+.btn-popup-confirm {
+  justify-self: center;
+  border: 1 px solid #ffdb4c;
+  background-color: #ffdb4c;
+}
+
+.btn-new-loan {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid gray;
+}
+
+.btn-new-loan:hover:enabled{
+  -webkit-animation-name: normalBtnHover;
+  -webkit-animation-duration: 500ms;
+  -webkit-animation-fill-mode: forwards;
+  animation-name: normalBtnHover;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+}
+
+.btn-apply-amt {
+  background-color: #ffdb4c;
+}
+
+.btn-apply-amt:hover:enabled,
+.btn-popup-confirm:hover:enabled  {
+  -webkit-animation-name: applyAmtHover;
+  -webkit-animation-duration: 500ms;
+  -webkit-animation-fill-mode: forwards;
+  animation-name: applyAmtHover;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+}
+
+.btn-apply-amt:disabled:hover,
+.btn-new-loan:disabled:hover,
+.btn-popup-confirm:disabled:hover {
+  background-color: lightgray;
+}
+
+input[type='checkbox'] {
+  -ms-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  transform: scale(1.5);
+  padding: 10px;
+}
+
+@-webkit-keyframes applyAmtHover {
+  from {
+    background-color: #ffdb4c
+  }
+
+  to {
+    background-color: #ddbe40;
+  }
+}
+
+@keyframes applyAmtHover {
+  from {
+    background-color: #ffdb4c
+  }
+
+  to {
+    background-color: #ddbe40;
+  }
+}
+
+@-webkit-keyframes normalBtnHover {
+  from {
+    background-color: rgb(255, 255, 255);
+  }
+
+  to {
+    background-color: lightgray;
+  }
+}
+
+@keyframes normalBtnHover {
+  from {
+    background-color: rgb(255, 255, 255);
+  }
+
+  to {
+    background-color: lightgray;
+  }
 }

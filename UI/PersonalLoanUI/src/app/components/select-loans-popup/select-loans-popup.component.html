@@ -1,6 +1,10 @@
+<div class="modal" *ngIf="(retrievedNewLoans$ | async).length > 0">
 <div class="select-loan-popup" *ngIf="(retrievedNewLoans$ | async).length > 0">
+  <h4>Available Personal Loans</h4>
+  <hr/>
   <div *ngFor="let loan of (retrievedNewLoans$ | async); let i = index" class="popup-item">
       <app-select-loans-popup-item [loan]="loan" [index]="i + 1"></app-select-loans-popup-item>
   </div>
-  <button (click)="selectLoanBtnClicked()" [disabled]="isBtnDisabled">Select Loan</button>
+  <button class="btn btn-popup-confirm" (click)="selectLoanBtnClicked()" [disabled]="isBtnDisabled">Select Loan</button>
+</div>
 </div>

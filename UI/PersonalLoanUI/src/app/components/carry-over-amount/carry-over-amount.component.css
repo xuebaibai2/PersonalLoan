@@ -1,6 +1,8 @@
 .carry-over-amt-container {
     display: grid;
     grid-template-columns: 5fr 2fr 1fr;
+    grid-column-gap: 3em;
+    margin: 0.5em 0 0.5em 0;
 }
 .amount {
     font-weight: bold;

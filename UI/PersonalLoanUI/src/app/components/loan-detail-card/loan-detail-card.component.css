@@ -21,6 +21,10 @@
     padding:15px;
 }
 
+.loan-card-balance label {
+    cursor: pointer;
+}
+
 .loan-card-balance > div {
     grid-column: auto;
     

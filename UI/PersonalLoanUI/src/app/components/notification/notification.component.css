@@ -1,14 +1,47 @@
-.notification > div {
-    background-color: rgb(233,233,233);
-    padding: 13px 5px 13px 30px;
-    width: 360px;
-    border-radius: 5px;
+
+.notification>div {
+  background-color: rgb(233, 233, 233);
+  padding: 13px 5px 13px 30px;
+  width: 360px;
+  border-radius: 5px;
+
 }
 
 .notification-error {
-    border-left: 5px solid darkred;
+  border-left: 5px solid darkred;
 }
 
 .notification-warning {
-    border-left: 5px solid darkorange;
+  border-left: 5px solid darkorange;
+}
+
+.show-warning {
+  -webkit-animation-name: showWarning;
+  -webkit-animation-duration: 300ms;
+  animation-name: showWarning;
+  animation-duration: 300ms;
+}
+
+@-webkit-keyframes showWarning {
+  from {
+    transform: translateX(300px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes showWarning {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
 }

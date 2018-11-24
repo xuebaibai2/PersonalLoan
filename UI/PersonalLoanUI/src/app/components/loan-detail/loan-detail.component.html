@@ -1,4 +1,4 @@
-<div *ngIf="(loans$ | async)">
+<div class="loan-detail-container" *ngIf="(loans$ | async)">
   <h4> You have {{ (loans$ | async).length }} Personal Loan</h4>
   <div class="loan-card-container">
     <div *ngFor="let loan of (loans$ | async); let i = index">
