@@ -1,4 +1,4 @@
-<div class="select-loan-popup">
+<div class="select-loan-popup" *ngIf="(retrievedNewLoans$ | async).length > 0">
   <div *ngFor="let loan of (retrievedNewLoans$ | async); let i = index" class="popup-item">
       <app-select-loans-popup-item [loan]="loan" [index]="i + 1"></app-select-loans-popup-item>
   </div>
