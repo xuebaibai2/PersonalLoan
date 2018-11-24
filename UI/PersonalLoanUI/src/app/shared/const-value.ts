@@ -5,3 +5,5 @@ export const MAX_LOAN_AMOUNT_SELECTED_WARNING =
 `There is maximun ${MAX_LOAN_AMOUNT} loans for each user`;
 export const URI_GET_DEFAULT_LOANS = 'http://demo5365007.mockable.io/getDefaultLoans';
 export const URI_GET_NEW_LOANS = 'http://demo5365007.mockable.io/getNewLoan';
+export const URI_GET_DEFAULT_LOANS_LIVE = 'http://localhost:2427/api/loans/getdefaultloans';
+export const URI_GET_NEW_LOANS_LIVE = 'http://localhost:2427/api/loans/getNewLoans';
