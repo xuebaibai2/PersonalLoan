@@ -16,6 +16,22 @@
   height: 0;
 }
 
-#app-loan-detail {}
-
-#app-notification {}
+@media(max-width: 1024px) {
+  #app-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    margin-top: 2em;
+  }
+  
+  #body-l {
+    grid-row: 2/3;
+    grid-column: 1/2;
+  }
+  
+  #body-r {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    margin-bottom: 5em;
+  }
+}

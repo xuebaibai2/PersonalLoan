@@ -1,8 +1,7 @@
-
 .notification>div {
   background-color: rgb(233, 233, 233);
   padding: 13px 5px 13px 30px;
-  width: 360px;
+  /* width: 360px; */
   border-radius: 5px;
 
 }
@@ -22,9 +21,21 @@
   animation-duration: 300ms;
 }
 
+@media(max-width: 1024px) {
+  .notification>div {
+    margin-left: 26em;
+  }
+}
+
+@media(max-width: 600px) {
+  .notification>div {
+    margin-left: 18em;
+  }
+}
+
 @-webkit-keyframes showWarning {
   from {
-    transform: translateX(300px);
+    transform: translateX(100%);
     opacity: 0;
   }
 
@@ -35,13 +46,13 @@
 }
 
 @keyframes showWarning {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-    
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
