@@ -1,0 +1,8 @@
+﻿Init EF Migration:
+Enable-Migrations -ContextTypeName PersonalLoanContext -MigrationsDirectory Migrations\PersonalLoan
+
+Add new Migration: (add name at last)
+add-migration -ConfigurationTypeName PersonalLoanAPI.Migrations.PersonalLoan.Configuration "MigrationName"
+
+Update Database:
+update-database -ConfigurationTypeName PersonalLoanAPI.Migrations.PersonalLoan.Configuration
