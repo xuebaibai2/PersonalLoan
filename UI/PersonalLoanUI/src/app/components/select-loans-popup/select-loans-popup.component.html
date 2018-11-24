@@ -1,0 +1,6 @@
+<div class="select-loan-popup">
+  <div *ngFor="let loan of (loans$ | async); let i = index" class="popup-item">
+      <app-select-loans-popup-item [loan]="loan" [index]="i + 1"></app-select-loans-popup-item>
+  </div>
+  <button (click)="selectLoanBtnClicked()">Select Loan</button>
+</div>

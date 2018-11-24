@@ -6,13 +6,17 @@ export interface LoanState {
     loaded: boolean;
     loading: boolean;
     error: string;
+    retrievedNewLoans: Loan[];
+    selectedNewLoans: Loan[];
 }
 
 export const initialState: LoanState = {
     data: [],
     loaded: false,
     loading: false,
-    error: ''
+    error: '',
+    retrievedNewLoans: [],
+    selectedNewLoans: []
 };
 
 export function reducer(state = initialState, action: fromLoans.LoansAction): LoanState {
@@ -49,12 +53,12 @@ export function reducer(state = initialState, action: fromLoans.LoansAction): Lo
             };
         }
         case fromLoans.LOAD_NEW_LOANS_SUCCESS: {
-            const data = [...state.data, action.payload];
+            const retrievedNewLoans = [...state.retrievedNewLoans, ...action.payload];
             return {
                 ...state,
                 loading: false,
                 loaded: true,
-                data
+                retrievedNewLoans
             };
         }
         case fromLoans.LOAD_NEW_LOANS_FAIL: {
@@ -66,11 +70,41 @@ export function reducer(state = initialState, action: fromLoans.LoansAction): Lo
                 error
             };
         }
+        case fromLoans.SELECT_NEW_LOAN: {
+            const selectedNewLoans = [...state.selectedNewLoans, action.payload];
+            return {
+                ...state,
+                selectedNewLoans
+            };
+        }
+        case fromLoans.UNSELECT_NEW_LOAN: {
+            const selectedNewLoans = state.selectedNewLoans.filter(
+                (loan) => loan !== action.payload
+            );
+            return {
+                ...state,
+                selectedNewLoans
+            };
+        }
+        case fromLoans.CONFIRM_SELECT_NEW_LOANS: {
+            const data = [...state.data, ...state.selectedNewLoans];
+            const retrievedNewLoans = [];
+            const selectedNewLoans = [];
+            return {
+                ...state,
+                data,
+                retrievedNewLoans,
+                selectedNewLoans
+            };
+        }
     }
     return state;
 }
 
+export const getSelectedNewLoans = (state: LoanState) => state.selectedNewLoans;
+export const getRetrievedNewLoans = (state: LoanState) => state.retrievedNewLoans;
 export const getLoansLoading = (state: LoanState) => state.loading;
 export const getLoansLoaded = (state: LoanState) => state.loaded;
 export const getLoansError = (state: LoanState) => state.error;
 export const getLoans = (state: LoanState) => state.data;
+

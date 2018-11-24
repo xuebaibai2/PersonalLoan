@@ -1,0 +1,7 @@
+.select-loan-popup {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid black;
+    width: 600px;
+    justify-items: auto;
+}

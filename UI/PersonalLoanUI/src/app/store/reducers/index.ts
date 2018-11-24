@@ -25,6 +25,8 @@ export const getLoans = createSelector(getLoanState, fromLoans.getLoans);
 export const getLoansLoaded = createSelector(getLoanState, fromLoans.getLoansLoaded);
 export const getLoansLoading = createSelector(getLoanState, fromLoans.getLoansLoading);
 export const getLoansError = createSelector(getLoanState, fromLoans.getLoansError);
+export const getSelectedNewLoans = createSelector(getLoanState, fromLoans.getSelectedNewLoans);
+export const getRetrievedNewLoans = createSelector(getLoanState, fromLoans.getRetrievedNewLoans);
 
 // get single payout state by from retrived payout state
 export const getPayoutAmount = createSelector(getPayoutState, fromPayout.getPayoutAmount);

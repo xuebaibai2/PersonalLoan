@@ -12,6 +12,8 @@ import { LoanDetailCardComponent } from './components/loan-detail-card/loan-deta
 import { BtnApplyAmountComponent } from './components/btn-apply-amount/btn-apply-amount.component';
 import { BtnApplyNewLoanComponent } from './components/btn-apply-new-loan/btn-apply-new-loan.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { SelectLoansPopupComponent } from './components/select-loans-popup/select-loans-popup.component';
+import { SelectLoansPopupItemComponent } from './components/select-loans-popup-item/select-loans-popup-item.component';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,7 +29,9 @@ import { reducers, effects } from './store';
     LoanDetailCardComponent,
     BtnApplyAmountComponent,
     BtnApplyNewLoanComponent,
-    NotificationComponent
+    NotificationComponent,
+    SelectLoansPopupComponent,
+    SelectLoansPopupItemComponent
   ],
   imports: [
     BrowserModule,
