@@ -7,7 +7,7 @@ using PersonalLoanAPI.Models.api;
 using PersonalLoanAPI.DataAccess;
 using System.Data.Entity;
 
-namespace PersonalLoanAPI.Services
+namespace PersonalLoanAPI.DataAccess.DataAccessService
 {
     public class LoanService
     {

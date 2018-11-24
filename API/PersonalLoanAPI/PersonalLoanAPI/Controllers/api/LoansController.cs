@@ -1,13 +1,9 @@
-﻿using PersonalLoanAPI.DataAccess;
-using PersonalLoanAPI.Models;
+﻿using PersonalLoanAPI.DataAccess.DataAccessService;
 using PersonalLoanAPI.Models.api;
 using PersonalLoanAPI.Models.database;
-using PersonalLoanAPI.Services;
 using PersonalLoanAPI.Services.Filters;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -27,6 +23,7 @@ namespace PersonalLoanAPI.Controllers.api
             loanService = new LoanService();
             errorService = new ErrorService();
         }
+
         [Route("api/loans/getDefaultLoans")]
         public async Task<IEnumerable<LoanApi>> GetDefaultLoans()
         {
@@ -38,22 +35,27 @@ namespace PersonalLoanAPI.Controllers.api
         {
             if (requestParams == null || requestParams.loanLevel == 0)
             {
-                var error = new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
-                {
-                    Content = new StringContent("No Personal Loan is found.")
-                });
-
-                // Log Exception
-                Errors err = new Errors()
-                {
-                    ExceptionType = error.GetType().ToString(),
-                    Message = error.Message,
-                    Date = DateTime.Today
-                };
-                errorService.LogError(err);
-                throw error;
+                ThrowNotFoundException();
             }
             return await loanService.GetNewLoans(requestParams);
+        }
+
+        private void ThrowNotFoundException()
+        {
+            var error = new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent("No Personal Loan is found.")
+            });
+
+            // Log Exception
+            Errors err = new Errors()
+            {
+                ExceptionType = error.GetType().ToString(),
+                Message = error.Message,
+                Date = DateTime.Now
+            };
+            errorService.LogError(err);
+            throw error;
         }
     }
 }

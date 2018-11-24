@@ -21,9 +21,6 @@ namespace PersonalLoanAPI.Migrations.PersonalLoan
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            context.Loans.AddOrUpdate(
-                loan => loan.Id, DummyData.getLoans().ToArray());
-            context.SaveChanges();
         }
     }
 }
