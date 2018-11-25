@@ -5,3 +5,5 @@
 /API/PersonalLoanAPI/.vs
 /API/PersonalLoanAPI/PersonalLoanAPI.Tests/obj/Debug
 /API/PersonalLoanAPI/PersonalLoanAPI.Tests/bin
+/API/PersonalLoanAPI/PersonalLoanAPI/obj/Release
+/API/PersonalLoanAPI/PersonalLoanAPI.Tests/obj/Release
