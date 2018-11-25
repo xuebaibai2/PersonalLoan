@@ -14,9 +14,9 @@ namespace PersonalLoanAPI.DataAccess
         {
         }
 
-        public DbSet<Loan> Loans { get; set; }
+        public virtual DbSet<Loan> Loans { get; set; }
 
-        public DbSet<Errors> Errors { get; set; }
+        public virtual DbSet<Errors> Errors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
