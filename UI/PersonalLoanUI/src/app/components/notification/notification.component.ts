@@ -27,16 +27,6 @@ export class NotificationComponent implements OnInit {
     this.loanError$ = this.store.select<any>(fromStore.getLoansError);
     this.isOnModalView = false;
 
-    // this.store.select<any>(fromStore.getLoans).subscribe(
-    //   (loans: Loan[]) => {
-    //     if (loans.length >= CONSTVALUE.MAX_LOAN_AMOUNT) {
-    //       this.hasWarning = true;
-    //       this.maxLoanAmountWarnning = loans.length >= CONSTVALUE.MAX_LOAN_AMOUNT ?
-    //       CONSTVALUE.MAX_LOAN_AMOUNT_WARNING : '';
-    //     }
-    //   }
-    // );
-
     this.store.select<any>(fromStore.getLoanState).subscribe(
       (state: LoanState) => {
         if (state.data.length + state.selectedNewLoans.length > CONSTVALUE.MAX_LOAN_AMOUNT) {

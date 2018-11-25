@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CarryOverAmountComponent } from './carry-over-amount.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from '../../store';
 
 describe('CarryOverAmountComponent', () => {
   let component: CarryOverAmountComponent;
@@ -8,7 +10,8 @@ describe('CarryOverAmountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CarryOverAmountComponent ]
+      declarations: [ CarryOverAmountComponent ],
+      imports: [StoreModule.forRoot(reducers)]
     })
     .compileComponents();
   }));

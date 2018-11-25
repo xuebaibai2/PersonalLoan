@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BtnApplyNewLoanComponent } from './btn-apply-new-loan.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from '../../store';
 
 describe('BtnApplyNewLoanComponent', () => {
   let component: BtnApplyNewLoanComponent;
@@ -8,7 +10,8 @@ describe('BtnApplyNewLoanComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BtnApplyNewLoanComponent ]
+      declarations: [ BtnApplyNewLoanComponent ],
+      imports: [StoreModule.forRoot(reducers)]
     })
     .compileComponents();
   }));
