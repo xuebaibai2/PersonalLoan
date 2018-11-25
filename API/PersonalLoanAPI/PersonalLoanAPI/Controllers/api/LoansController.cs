@@ -1,4 +1,5 @@
-﻿using PersonalLoanAPI.DataAccess.DataAccessService;
+﻿using PersonalLoanAPI.DataAccess;
+using PersonalLoanAPI.DataAccess.DataAccessService;
 using PersonalLoanAPI.Models.api;
 using PersonalLoanAPI.Models.database;
 using PersonalLoanAPI.Services.Filters;
@@ -18,10 +19,17 @@ namespace PersonalLoanAPI.Controllers.api
     {
         LoanService loanService;
         ErrorService errorService;
+        
         public LoansController()
         {
-            loanService = new LoanService();
             errorService = new ErrorService();
+            loanService = new LoanService(new PersonalLoanContext());
+        }
+
+        public LoansController(PersonalLoanContext context)
+        {
+            errorService = new ErrorService();
+            loanService = new LoanService(context);
         }
 
         [Route("api/loans/getDefaultLoans")]

@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Loan } from 'src/app/models/loan.model';
+import { LoadNewLoanParam, LoanLevel } from '../../models/api/loadNewLoan.param.model';
 import * as fromStore from '../../store';
 import * as CONSTVALUE from '../../shared/const-value';
 
@@ -16,15 +17,18 @@ import * as CONSTVALUE from '../../shared/const-value';
 export class BtnApplyNewLoanComponent implements OnInit {
 
   loans$: Observable<Loan[]>;
-  
-  constructor(private store: Store<fromStore.AppState>) { }
+  isLoading$: Observable<boolean> = of(true);
+
+  constructor(private store: Store<fromStore.AppState>) {
+  }
 
   ngOnInit() {
     this.loans$ = this.store.select<any>(fromStore.getLoans);
+    this.isLoading$ = this.store.select<any>(fromStore.getLoansLoading);
   }
 
   newLoanBtnClicked() {
-    this.store.dispatch(new fromStore.LoadNewLoan());
+    this.store.dispatch(new fromStore.LoadNewLoan(new LoadNewLoanParam(LoanLevel.Low)));
   }
 
   isMaxLoanAmountReached() {

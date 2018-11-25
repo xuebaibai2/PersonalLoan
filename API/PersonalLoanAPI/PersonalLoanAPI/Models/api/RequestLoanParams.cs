@@ -8,6 +8,5 @@ namespace PersonalLoanAPI.Models.api
     public class RequestLoanParams
     {
         public LoanLevel loanLevel { get; set; }
-        public string[] refNumbers { get; set; }
     }
 }

@@ -1,45 +1,91 @@
 .loan-card {
-    display: grid;
-    grid-template-columns: 1fr;
-    border: 1px solid black;
-    grid-auto-rows: minmax(30px, auto);
-    width: 700px;
-    margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid black;
+  grid-auto-rows: minmax(30px, auto);
+  width: 700px;
+  margin-bottom: 20px;
 }
 
 .loan-card-header {
-    background-color: rgb(233, 233, 233);
-    border-bottom: 1px solid black;
-    padding:15px;
+  background-color: rgb(233, 233, 233);
+  border-bottom: 1px solid black;
+  padding: 15px;
 }
 
 .loan-card-balance {
-    display: grid;
-    grid-template-columns: 2fr 1fr 2fr;
-    grid-template-rows: 1fr;
-    border-bottom: 1px solid black;
-    padding:15px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-rows: 1fr;
+  border-bottom: 1px solid black;
+  padding: 15px;
+  background-color:white;
 }
 
-.loan-card-balance > div {
-    grid-column: auto;
-    
+.loan-card-balance label {
+  cursor: pointer;
+}
+
+.loan-card-balance>div {
+  grid-column: auto;
+
 }
 
 .loan-card-detail {
-    display: none;
+  display: none;
 }
 
 .display-card-detail {
-    display: grid;
-    grid-template-columns: 2fr 1fr 2fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    margin:15px;
-    grid-gap: 5px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  margin: 15px;
+  grid-gap: 5px;
+
+  -webkit-animation-name: showLoanCardDetail;
+  -webkit-animation-duration: 200ms;
+  animation-name: showLoanCardDetail;
+  animation-duration: 200ms;
+  z-index: -1;
 }
 
-.loan-card-detail > div {
-    grid-column: 1/4;
-    display: grid;
-    grid-template-columns: 2fr 1fr 2fr;
+.loan-card-detail>div {
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+}
+
+@media(max-width: 1024px) {
+  .loan-card {
+    width: auto;
+    margin-right: 2em;
+  }
+}
+
+@media(max-width: 600px) {
+  .loan-card {
+    margin-right: 1em;
+    margin-left: 1em;
+    font-size: 0.5rem;
+  }
+}
+
+@-webkit-keyframes showLoanCardDetail {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes showLoanCardDetail {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }

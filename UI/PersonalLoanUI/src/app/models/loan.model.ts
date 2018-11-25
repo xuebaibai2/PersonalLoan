@@ -1,5 +1,5 @@
 export interface Loan {
-    id: number;
+    refNumber: number;
     name: string;
     balance: number;
     interest: number;

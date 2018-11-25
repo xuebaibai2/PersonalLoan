@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Loan } from '../models/loan.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import * as CONSTVALUE from '../shared/const-value';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,16 @@ export class LoanService {
    }
 
    getDefaultLoans(): Observable<Loan[]> {
-     return this.http.get<Loan[]>('http://demo5365007.mockable.io/getDefaultLoans').pipe(
-       catchError((err: any) => throwError(err.message))
-     );
-   }
+    return this.http.get<Loan[]>(CONSTVALUE.URI_GET_DEFAULT_LOANS_LIVE).pipe(
+      catchError((err: any) => throwError(err.error))
+    );
+  }
 
-   getNewLoans(): Observable<Loan> {
-     return this.http.get<Loan>('http://demo5365007.mockable.io/getNewLoan').pipe(
-      catchError((err: any) => throwError(err.message))
-     );
-   }
+  getNewLoans(loanLevel: string): Observable<Loan[]> {
+    return this.http.get<Loan[]>(CONSTVALUE.URI_GET_NEW_LOANS_LIVE, {
+      params: {'loanLevel': loanLevel}}).pipe(
+     catchError((err: any) => throwError(err.error))
+    );
+  }
+
 }

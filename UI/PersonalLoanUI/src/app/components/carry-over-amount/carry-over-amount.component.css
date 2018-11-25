@@ -1,7 +1,31 @@
 .carry-over-amt-container {
     display: grid;
     grid-template-columns: 5fr 2fr 1fr;
+    grid-column-gap: 3em;
+    margin: 0.5em 0 0.5em 0;
 }
 .amount {
     font-weight: bold;
+}
+
+@media(max-width: 600px) {
+    .carry-over-amt-container {
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 2em;
+        justify-items: center;
+    }
+    .carry-over-amt-container > div {
+        font-size: 1.3rem;
+    }
+    .description {
+        grid-column: 1/3;
+    }
+    .unit {
+        grid-column: 1/2;
+        justify-self: right;
+    }
+    .amount {
+        grid-column: 2/3;
+
+    }
 }
