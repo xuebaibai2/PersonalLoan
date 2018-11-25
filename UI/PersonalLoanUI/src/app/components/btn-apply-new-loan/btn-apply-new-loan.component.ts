@@ -17,9 +17,10 @@ import * as CONSTVALUE from '../../shared/const-value';
 export class BtnApplyNewLoanComponent implements OnInit {
 
   loans$: Observable<Loan[]>;
-  isLoading$: Observable<boolean>;
+  isLoading$: Observable<boolean> = of(true);
 
-  constructor(private store: Store<fromStore.AppState>) { }
+  constructor(private store: Store<fromStore.AppState>) {
+  }
 
   ngOnInit() {
     this.loans$ = this.store.select<any>(fromStore.getLoans);

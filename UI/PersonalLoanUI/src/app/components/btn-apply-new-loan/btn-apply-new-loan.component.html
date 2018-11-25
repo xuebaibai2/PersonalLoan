@@ -1,1 +1,1 @@
-<button class="btn btn-new-loan" id="btn-apply-new-loan" [ngClass]="{'spinner': (isLoading$ | async)}" (click)="newLoanBtnClicked()" [disabled]="(isMaxLoanAmountReached() | async) || (isLoading$ | async)">Apply for new Personal Loan</button>
+<button class="btn btn-new-loan" id="btn-apply-new-loan" [ngClass]="{'spinner': isLoading$ | async}" (click)="newLoanBtnClicked()" [disabled]="(isMaxLoanAmountReached() | async) || (isLoading$ | async)">Apply for new Personal Loan</button>

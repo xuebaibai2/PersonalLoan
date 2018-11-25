@@ -14,8 +14,9 @@ import * as CONSTVALUE from '../../shared/const-value';
   styleUrls: ['./select-loans-popup.component.css']
 })
 export class SelectLoansPopupComponent implements OnInit {
-  retrievedNewLoans$: Observable<Loan[]>;
-  loanState$: Observable<AppState>;
+  // retrievedNewLoans$: Observable<Loan[]>;
+  retrievedNewLoans: Loan[];
+  // stagedLoans: Loan[];
   stagedLoansNum: number;
   selectedNewLoansNum: number;
   isBtnDisabled: boolean;
@@ -24,15 +25,20 @@ export class SelectLoansPopupComponent implements OnInit {
   constructor(private store: Store<fromStore.AppState>) { }
 
   ngOnInit() {
-    this.retrievedNewLoans$ = this.store.select<any>(fromStore.getRetrievedNewLoans);
+    // this.retrievedNewLoans$ = this.store.select<any>(fromStore.getRetrievedNewLoans);
 
     this.store.select<any>(fromStore.getLoanState).subscribe(
       (state) => {
         this.stagedLoansNum = state.data.length;
         this.selectedNewLoansNum = state.selectedNewLoans.length;
         this.isBtnDisabled = !this.isMaxAllowedLoanReached();
+        this.retrievedNewLoans = this.filterDupLoans(state.data, state.retrievedNewLoans);
       }
     );
+  }
+
+  filterDupLoans(stagedLoans: Loan[], retrievedLoans: Loan[]): Loan[] {
+    return retrievedLoans.filter(o => !stagedLoans.find(o2 => o.refNumber === o2.refNumber));
   }
 
   selectLoanBtnClicked() {

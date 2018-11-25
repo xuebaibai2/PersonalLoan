@@ -25,7 +25,7 @@ export function reducer(state = initialState, action: fromLoans.LoansAction): Lo
         case fromLoans.LOAD_DEFAULT_LOANS: {
             return {
                 ...state,
-                loading: true
+                // loading: true
             };
         }
         case fromLoans.LOAD_DEFAULT_LOANS_SUCCESS: {
