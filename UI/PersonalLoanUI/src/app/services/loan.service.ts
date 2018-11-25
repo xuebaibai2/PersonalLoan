@@ -13,13 +13,13 @@ export class LoanService {
    }
 
    getDefaultLoans(): Observable<Loan[]> {
-    return this.http.get<Loan[]>(CONSTVALUE.URI_GET_DEFAULT_LOANS_LIVE).pipe(
+    return this.http.get<Loan[]>(CONSTVALUE.URI_GET_DEFAULT_LOANS).pipe(
       catchError((err: any) => throwError(err.error))
     );
   }
 
   getNewLoans(loanLevel: string): Observable<Loan[]> {
-    return this.http.get<Loan[]>(CONSTVALUE.URI_GET_NEW_LOANS_LIVE, {
+    return this.http.get<Loan[]>(CONSTVALUE.URI_GET_NEW_LOANS, {
       params: {'loanLevel': loanLevel}}).pipe(
      catchError((err: any) => throwError(err.error))
     );

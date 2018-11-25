@@ -13,7 +13,7 @@ using System.Web.Http.Cors;
 
 namespace PersonalLoanAPI.Controllers.api
 {
-    [EnableCors(origins: "http://localhost:4200", headers: "", methods:"*")]
+    [EnableCors(origins: "*", headers: "", methods:"*")]
     [APIExceptionFilter]
     public class LoansController : ApiController
     {
@@ -23,13 +23,7 @@ namespace PersonalLoanAPI.Controllers.api
         public LoansController()
         {
             errorService = new ErrorService();
-            loanService = new LoanService(new PersonalLoanContext());
-        }
-
-        public LoansController(PersonalLoanContext context)
-        {
-            errorService = new ErrorService();
-            loanService = new LoanService(context);
+            loanService = new LoanService();
         }
 
         [Route("api/loans/getDefaultLoans")]
@@ -41,7 +35,7 @@ namespace PersonalLoanAPI.Controllers.api
         [Route("api/loans/getNewLoans")]
         public async Task<IEnumerable<LoanApi>> GetNewLoans([FromUri]RequestLoanParams requestParams)
         {
-            if (requestParams == null || requestParams.loanLevel == 0)
+            if (requestParams == null || requestParams.loanLevel == 0 || !ModelState.IsValid)
             {
                 ThrowNotFoundException();
             }

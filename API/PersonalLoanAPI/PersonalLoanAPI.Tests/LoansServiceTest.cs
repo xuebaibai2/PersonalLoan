@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PersonalLoanAPI.DataAccess;
 using PersonalLoanAPI.Models.database;
 using PersonalLoanAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using System.Data.Entity;
 using PersonalLoanAPI.DataAccess.DataAccessService;
-using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using PersonalLoanAPI.Models.api;
 
@@ -16,32 +12,76 @@ namespace PersonalLoanAPI.Tests
     [TestClass]
     public class LoansServiceTest
     {
+        LoanService _service;
+        Loan defaultLoan;
+        Loan lowLevelLoan;
+        Loan midLevelLoan;
+        Loan highLevelLoan;
+
+        [TestInitialize]
+        public void InitTest()
+        {
+            _service = new LoanService();
+            defaultLoan = new Loan()
+            {
+                Name = "DefaultLoan",
+                Balance = 1000,
+                Interest = 100,
+                EarlyPaymentFee = 10,
+                PayoutAmount = 1110,
+                RefNumber = "000001",
+                LoanLevel = LoanLevel.Low,
+                IsDefaultLoan = true
+            };
+            midLevelLoan = new Loan()
+            {
+                Name = "Mid Loan",
+                Balance = 3000,
+                Interest = 300,
+                EarlyPaymentFee = 30,
+                PayoutAmount = 3330,
+                RefNumber = "000003",
+                LoanLevel = LoanLevel.Mid,
+                IsDefaultLoan = false
+            };
+            highLevelLoan = new Loan()
+            {
+                Name = "High Loan",
+                Balance = 6000,
+                Interest = 600,
+                EarlyPaymentFee = 60,
+                PayoutAmount = 6660,
+                RefNumber = "000006",
+                LoanLevel = LoanLevel.High,
+                IsDefaultLoan = false
+            };
+
+        }
 
         [TestMethod]
         public async Task LoanService_GetDefaultLoans_ReturnDefaultLoans()
         {
-            var data = Seed().AsQueryable();
-            var mockSet = GetMockSet(data);
+            var getCotainedLoan = false;
+            _service.CreateNewLoan(defaultLoan);
+            var loans = (await _service.GetDefaultLoans()).ToList();
+            
+            foreach (var loan in loans)
+            {
+                if (loan.refNumber.Equals(defaultLoan.RefNumber))
+                {
+                    getCotainedLoan = true;
+                    break;
+                }
+            }
 
-            var mockContext = new Mock<PersonalLoanContext>();
-            mockContext.Setup(m => m.Loans).Returns(mockSet.Object);
-
-            var service = new LoanService(mockContext.Object);
-            var loans = await service.GetDefaultLoans();
-
-            Assert.AreEqual("Loan 1", loans.FirstOrDefault().name);
+            Assert.IsTrue(getCotainedLoan);
+            _service.DeleteLoan(defaultLoan);
         }
 
         [TestMethod]
         public async Task LoanService_GetDefaultLoans_GetLoanApiType()
         {
-            var data = Seed().AsQueryable();
-            var mockSet = GetMockSet(data);
-
-            var mockContext = new Mock<PersonalLoanContext>();
-            mockContext.Setup(m => m.Loans).Returns(mockSet.Object);
-
-            var service = new LoanService(mockContext.Object);
+            var service = new LoanService();
             var loans = await service.GetDefaultLoans();
 
             Assert.IsInstanceOfType(loans.FirstOrDefault(), typeof(LoanApi));
@@ -50,131 +90,59 @@ namespace PersonalLoanAPI.Tests
         [TestMethod]
         public async Task LoanService_GetNewLoans_ReturnNewLoansWithLowLoanLevel()
         {
-            var data = Seed().AsQueryable();
-            var mockSet = GetMockSet(data);
+            var getCotainedLoan = false;
+            _service.CreateNewLoan(defaultLoan);
+            var loans = (await _service.GetNewLoans(new RequestLoanParams() { loanLevel = LoanLevel.Low })).ToList();
 
-            var mockContext = new Mock<PersonalLoanContext>();
-            mockContext.Setup(m => m.Loans).Returns(mockSet.Object);
-
-            var service = new LoanService(mockContext.Object);
-            var loans = (await service.GetNewLoans(new RequestLoanParams() { loanLevel = LoanLevel.Low })).ToList();
-            
-            Assert.AreEqual("Loan 1", loans[0].name);
-            Assert.AreEqual("Loan 2", loans[1].name);
-            Assert.AreEqual("Loan 3", loans[2].name);
+            foreach (var loan in loans)
+            {
+                if (loan.refNumber.Equals(defaultLoan.RefNumber))
+                {
+                    getCotainedLoan = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(getCotainedLoan);
+            _service.DeleteLoan(defaultLoan);
         }
 
         [TestMethod]
         public async Task LoanService_GetNewLoans_ReturnNewLoansWithMidLoanLevel()
         {
-            var data = Seed().AsQueryable();
-            var mockSet = GetMockSet(data);
+            var getCotainedLoan = false;
+            _service.CreateNewLoan(midLevelLoan);
+            var loans = (await _service.GetNewLoans(new RequestLoanParams() { loanLevel = LoanLevel.Mid })).ToList();
 
-            var mockContext = new Mock<PersonalLoanContext>();
-            mockContext.Setup(m => m.Loans).Returns(mockSet.Object);
-
-            var service = new LoanService(mockContext.Object);
-            var loans = (await service.GetNewLoans(new RequestLoanParams() { loanLevel = LoanLevel.Mid })).ToList();
-
-            Assert.AreEqual("Loan 4", loans[0].name);
-            Assert.AreEqual("Loan 5", loans[1].name);
+            foreach (var loan in loans)
+            {
+                if (loan.refNumber.Equals(midLevelLoan.RefNumber))
+                {
+                    getCotainedLoan = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(getCotainedLoan);
+            _service.DeleteLoan(midLevelLoan);
         }
 
         [TestMethod]
         public async Task LoanService_GetNewLoans_ReturnNewLoansWithHighLoanLevel()
         {
-            var data = Seed().AsQueryable();
-            var mockSet = GetMockSet(data);
+            var getCotainedLoan = false;
+            _service.CreateNewLoan(highLevelLoan);
+            var loans = (await _service.GetNewLoans(new RequestLoanParams() { loanLevel = LoanLevel.High })).ToList();
 
-            var mockContext = new Mock<PersonalLoanContext>();
-            mockContext.Setup(m => m.Loans).Returns(mockSet.Object);
-
-            var service = new LoanService(mockContext.Object);
-            var loans = (await service.GetNewLoans(new RequestLoanParams() { loanLevel = LoanLevel.High })).ToList();
-
-            Assert.AreEqual("Loan 6", loans[0].name);
-        }
-
-        private Mock<DbSet<Loan>> GetMockSet(IQueryable<Loan> data)
-        {
-            var mockSet = new Mock<DbSet<Loan>>();
-
-            mockSet.As<IDbAsyncEnumerable<Loan>>()
-                .Setup(m => m.GetAsyncEnumerator())
-                .Returns(new TestDbAsyncEnumerator<Loan>(data.GetEnumerator()));
-
-            mockSet.As<IQueryable<Loan>>()
-                .Setup(m => m.Provider)
-                .Returns(new TestDbAsyncQueryProvider<Loan>(data.Provider));
-
-            mockSet.As<IQueryable<Loan>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Loan>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Loan>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            return mockSet;
-        }
-
-        private IEnumerable<Loan> Seed()
-        {
-            return new[]
+            foreach (var loan in loans)
             {
-                new Loan() {
-                    Name = "Loan 1",
-                    Balance = 1000,
-                    Interest = 100,
-                    EarlyPaymentFee = 10,
-                    PayoutAmount = 1110,
-                    RefNumber = "000001",
-                    LoanLevel = LoanLevel.Low,
-                    IsDefaultLoan = true
-                },
-                new Loan() {
-                    Name = "Loan 2",
-                    Balance = 2000,
-                    Interest = 200,
-                    EarlyPaymentFee = 20,
-                    PayoutAmount = 2220,
-                    RefNumber = "000002",
-                    LoanLevel = LoanLevel.Low,
-                    IsDefaultLoan = true
-                },new Loan() {
-                    Name = "Loan 3",
-                    Balance = 3000,
-                    Interest = 300,
-                    EarlyPaymentFee = 30,
-                    PayoutAmount = 3330,
-                    RefNumber = "000003",
-                    LoanLevel = LoanLevel.Low,
-                    IsDefaultLoan = false
-                },new Loan() {
-                    Name = "Loan 4",
-                    Balance = 4000,
-                    Interest = 400,
-                    EarlyPaymentFee = 40,
-                    PayoutAmount = 4440,
-                    RefNumber = "000004",
-                    LoanLevel = LoanLevel.Mid,
-                    IsDefaultLoan = false
-                },new Loan() {
-                    Name = "Loan 5",
-                    Balance = 5000,
-                    Interest = 500,
-                    EarlyPaymentFee = 50,
-                    PayoutAmount = 5550,
-                    RefNumber = "000005",
-                    LoanLevel = LoanLevel.Mid,
-                    IsDefaultLoan = false
-                },new Loan() {
-                    Name = "Loan 6",
-                    Balance = 6000,
-                    Interest = 600,
-                    EarlyPaymentFee = 60,
-                    PayoutAmount = 6660,
-                    RefNumber = "000006",
-                    LoanLevel = LoanLevel.High,
-                    IsDefaultLoan = false
+                if (loan.refNumber.Equals(highLevelLoan.RefNumber))
+                {
+                    getCotainedLoan = true;
+                    break;
                 }
-            };
+            }
+            Assert.IsTrue(getCotainedLoan);
+            _service.DeleteLoan(highLevelLoan);
         }
+        
     }
 }
